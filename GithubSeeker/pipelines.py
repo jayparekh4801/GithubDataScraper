@@ -6,8 +6,16 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from pymongo import MongoClient
+import scrapy
 
 
 class GithubseekerPipeline:
+    def __init__(self) :
+        connector = MongoClient('mongodb://localhost')
+        database = connector['gitbase']
+        self.collection = database['userData']
+
     def process_item(self, item, spider):
-        return item
+        self.collection.insert(dict(item))
+        # return item

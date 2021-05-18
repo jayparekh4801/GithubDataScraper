@@ -18,7 +18,7 @@ class GithubseekerSpider(scrapy.Spider):
     def __init__(self, name = None, userName = "jayparekh4801", **kwargs) :
         self.start_urls = ["https://github.com/" + userName]
 
-    def parse(self, response):
+    def parse(self, response) :
         l = ItemLoader(item = GithubseekerItem(), response=response)    
         name = response.xpath('//span[@itemprop = "name"]/text()').get()
         userName = response.xpath('//span[@itemprop = "additionalName"]/text()').get()
@@ -68,13 +68,15 @@ class GithubseekerSpider(scrapy.Spider):
 
         #  code to put data in mongodb database
 
-        jl_file = max(glob.iglob('*.jl'), key = os.path.getctime)
-        mongo_connector = pymongo.MongoClient("mongodb://localhost/")
-        database = mongo_connector['gitDatabase']
-        collection = database['gitUserData']
+        # jl_file = max(glob.iglob('*.jl'), key = os.path.getctime)
+        # mongo_connector = pymongo.MongoClient("mongodb://localhost/")
+        # database = mongo_connector['gitDatabase']
+        # collection = database['gitUserData']
 
-        with open(jl_file) as fp :
-            for row in fp.readlines() :
-                gitRow = {"data" : row}
-                collection.insert_one(gitRow)
+        # with open(jl_file) as fp :
+        #     for row in fp.readlines() :
+        #         gitRow = {"data" : row}
+        #         collection.insert_one(gitRow)
+
+        pass
             
