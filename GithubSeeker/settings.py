@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'GithubSeeker.spiders'
 #USER_AGENT = 'GithubSeeker (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -64,7 +64,8 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'scrapy.pipelines.images.ImagesPipeline' : 1,
-    'GithubSeeker.pipelines.GithubseekerPipeline': 300,
+    'GithubSeeker.pipelines.GithubseekerPipeline' : 2,
+    'GithubSeeker.pipelines.GithubImageNaemChanger' : 3
 }
 
 IMAGES_STORE = '/Users/jayparekh/Documents/Scrapy_Tutorial/GithubSeeker/images'

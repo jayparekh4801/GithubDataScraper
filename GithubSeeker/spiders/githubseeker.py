@@ -20,15 +20,15 @@ class GithubseekerSpider(scrapy.Spider):
 
     def parse(self, response) :
         l = ItemLoader(item = GithubseekerItem(), response=response)    
-        name = response.xpath('//span[@itemprop = "name"]/text()').get()
-        userName = response.xpath('//span[@itemprop = "additionalName"]/text()').get()
+        name = response.xpath('//span[@itemprop = "name"]/text()').get().strip()
+        userName = response.xpath('//span[@itemprop = "additionalName"]/text()').get().strip()
         image_urls = response.xpath('//div/a/img/@src').get()
-        biodata = response.xpath('//div[@class = "d-flex flex-column"]/div[2]/div/div/text()').get()
+        biodata = response.xpath('//div[@class = "d-flex flex-column"]/div[2]/div/div/text()').get().strip()
         current_work = response.xpath('//span[@class = "p-org"]/div/text()').get()
         work_loc = response.xpath('//span[@class = "p-label"]/text()').get()
         no_repos = response.xpath('//a[@class = "UnderlineNav-item"][1]/span[1]/text()').get()
         lis_popular_repos = response.xpath('//span[@class = "repo"]/text()').get()
-        tot_commits = response.xpath('//h2[@class = "f4 text-normal mb-2"]/text()').get()
+        tot_commits = response.xpath('//h2[@class = "f4 text-normal mb-2"]/text()').get().strip()
 
         l.add_value('name', name)
         l.add_value('userName', userName)

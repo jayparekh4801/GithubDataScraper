@@ -8,6 +8,7 @@
 from itemadapter import ItemAdapter
 from pymongo import MongoClient
 import scrapy
+import os
 
 
 class GithubseekerPipeline:
@@ -18,4 +19,12 @@ class GithubseekerPipeline:
 
     def process_item(self, item, spider):
         self.collection.insert(dict(item))
-        # return item
+        return item
+
+class GithubImageNaemChanger : 
+    def process_item(self, item, spider) :
+        os.chdir('/Users/jayparekh/Documents/Scrapy_Tutorial/GithubSeeker/images')
+
+        if(item['images'][0]['path'] != None) :
+            new_path = 'full/' + item['userName'][0] + '.jpg'
+            os.rename(item['images'][0]['path'], new_path)
